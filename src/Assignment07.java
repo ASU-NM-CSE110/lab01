@@ -1,3 +1,4 @@
+
 // !!! MAKE NO CHANGES TO THIS FILE !!!
 import java.util.Scanner;
 public class Assignment07 {
