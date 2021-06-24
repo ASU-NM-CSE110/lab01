@@ -32,7 +32,7 @@ public class Monster {
 		//Writing the attack function
 		public int attack(Monster monster) {
 			 int damage = rand.nextInt(weapon.getMaxDamage()); // store it as damage
-			 monster.healthScore -= damage; // minus' damage frome the monsters health
+			 monster.healthScore -= damage; // minus' damage from the monsters health
 			 return damage; //returns the damage
 		}
 	}
