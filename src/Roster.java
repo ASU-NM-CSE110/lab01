@@ -14,22 +14,24 @@ import java.util.Scanner;
 
 public class Roster {
 	
+	//Declaring variables
 	private String fileName;
-	private ArrayList players2 = new ArrayList();
-	private ArrayList<Player> players =  new ArrayList<Player>();	
+	private ArrayList players2 = new ArrayList(); // creates an array list 
+	private ArrayList<Player> players =  new ArrayList<Player>();	//creates an array list with the <Player> object
 	public int num_roster1 = 15, num_roster2 = 4;
 	Scanner scan = new Scanner(System.in);
 	
 	
-	public Roster(String filename)throws FileNotFoundException, IOException {
-		BufferedReader reader = new BufferedReader(new FileReader("Roster1.dat"));
-		BufferedReader reader1 = new BufferedReader(new FileReader("Roster2.dat"));
+	public Roster(String filename)throws FileNotFoundException, IOException { // Excenptions being theown so the file readers can work
+		BufferedReader reader = new BufferedReader(new FileReader("Roster1.dat")); //reading the first roster
+		BufferedReader reader1 = new BufferedReader(new FileReader("Roster2.dat"));//reading the second roster
 		if(filename.equals("Roster1.dat")) {
-			for(int i = 0; i < num_roster1; i++) {
-				String line = reader.readLine();
+			for(int i = 0; i < num_roster1; i++) {//for loop to scan through everything
+				String line = reader.readLine();//reading the next line 
 				if(line != null) {
-					players2.add(line);
-					String placeHolder = players2.get(i).toString();
+					players2.add(line); //adding the line to the array list 
+					String placeHolder = players2.get(i).toString();//making a placeholder variable for the line of code and converting it to a String
+					//everything below is for seperating each line and turning it into objects;
 					String[] newPlayers = placeHolder.split(" "); 
 					String combine = newPlayers[0] + " " +  newPlayers[1];
 					String att = newPlayers[2].toString();
@@ -46,7 +48,7 @@ public class Roster {
 			
 			System.out.println("Loaded Roster 1");
 			
-		}else if(filename.equals("Roster2.dat")) {
+		}else if(filename.equals("Roster2.dat")) { // the same thing but for the next file
 			for(int i = 0; i < num_roster2; i++) {
 				String line = reader1.readLine();
 				if(line != null) {
@@ -71,7 +73,7 @@ public class Roster {
 	
 	}
 	
-	public Roster()throws FileNotFoundException, IOException {
+	public Roster()throws FileNotFoundException, IOException { //This is the default constructor that is just making the players array
 		BufferedReader reader = new BufferedReader(new FileReader("Roster1.dat"));
 		BufferedReader reader1 = new BufferedReader(new FileReader("Roster2.dat"));
 		if(reader.equals("Roster1.dat")) {
@@ -94,31 +96,32 @@ public class Roster {
 			System.out.println("No file of that name");
 		}
 	}
-	public void addPlayer(String name, Double attackStat, Double blockStat) {
+	public void addPlayer(String name, Double attackStat, Double blockStat) {//the add player method
 		players.add(new Player(name, attackStat, blockStat));
 	}
-	public int countPlayers() {
+	public int countPlayers() {// the count players method 
 		int playerSize = players.size();
 		return playerSize;
 	}
 	public Player getPlayerByName(String player) {
-		Player Name = new Player("null", 0.0, 0.0);
-		for(int i = 0; i < players.size(); i++) {
+		Player Name = new Player("null", 0.0, 0.0);//initializing a player
+		for(int i = 0; i < players.size(); i++) { // scanning through the whole array to find what they are looking for
 			if(players.get(i).getName().equals(player)) {
 				Name = players.get(i);
 			}
 		}
-		return Name; 
+		return Name; //returning the player found
 	}
 	//for loop that splits all the lines .split() and have it read every line
 	public void printTopAttackers() {
+		//declaring and initializing variables
 		double topAttackerStat = 0.0;
 		double secondTopAttackerStat = 0.0;
 		Player topAttacker = new Player("null", 0.0, 0.0);
 		Player secondTopAttacker = new Player("null", 0.0, 0.0);
 		for(int i = 0; i < players.size(); i++) {
-			double attStat = players.get(i).getAttackStat();
-			if(attStat > topAttackerStat) {
+			double attStat = players.get(i).getAttackStat(); // getting only their attack stat
+			if(attStat > topAttackerStat) { // making the conditions
 				topAttackerStat = attStat;
 				topAttacker = players.get(i);
 			}
@@ -126,15 +129,17 @@ public class Roster {
 		}
 		for(int i = 0; i < players.size(); i++) {
 			double attStat = players.get(i).getAttackStat();
-			if(attStat < topAttackerStat && attStat > secondTopAttackerStat) {
+			if(attStat < topAttackerStat && attStat > secondTopAttackerStat) {//making the conditions
 				secondTopAttackerStat = attStat;
 				secondTopAttacker = players.get(i);
 			}
 		}
+		//printing out both players with their info
 		topAttacker.printPlayerInfo();
 		secondTopAttacker.printPlayerInfo();
 	}
-	public void printTopBlockers() {
+	public void printTopBlockers() {//same thing as the attackers but with the block stat instead 
+		//declaring and initializing variables 
 		double topBlockerStat = 0.0;
 		double secondTopBlockerStat = 0.0;
 		Player topBlocker = new Player("null", 0.0, 0.0);
@@ -156,10 +161,11 @@ public class Roster {
 			}
 			
 		}
-		topBlocker.printPlayerInfo();
+		//prinint the players that have the highest stats
+		topBlocker.printPlayerInfo(); 
 		secondTopBlocker.printPlayerInfo();
 	}
-	public void printAllPlayers() {
+	public void printAllPlayers() { // this will just print all players by going through a for loop
 		for(int i = 0; i < players.size(); i++) {
 			((Player)players.get(i)).printPlayerInfo();
 		}

@@ -8,13 +8,13 @@ public class Player {
 	private double attackStat, blockStat;
 		
 	
-	public Player(String Name, Double AttackStat, Double BlockStat) {
+	public Player(String Name, Double AttackStat, Double BlockStat) { // overloaded constructor that initializes variables
 		this.name = Name;
 		this.attackStat = AttackStat; 
 		this.blockStat = BlockStat;
 		
 	}
-	public String getName() {
+	public String getName() { 
 		return name;
 	}
 	public Double getAttackStat(){
@@ -29,7 +29,7 @@ public class Player {
 	public void setBlockStat(Double BlockStat) {
 		this.blockStat = BlockStat;
 	}
-	public void printPlayerInfo() {
+	public void printPlayerInfo() { // This is how all the players will be printed 
 		System.out.printf("%s (attack = %,.2f block = %,.2f) \n", name, attackStat, blockStat );
 	}
 }
